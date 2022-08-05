@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+testing.R
+LICENSE.MD
+cran-comments.MD
+authentication.R
+NEWS.MD
+README.MD
+^CRAN-RELEASE$
+Zendesk New Approach.R
+get_tickets OLD.R
+^\.github$

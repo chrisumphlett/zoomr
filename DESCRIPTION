@@ -1,0 +1,26 @@
+Package: zoomr 
+Title: Connect to Your 'Zoom' Data with R!
+Version: 0.0.0.9999
+Authors@R: 
+    c(person(given = "Chris",
+           family = "Umphlett",
+           role = c("aut", "cre"),
+           email = "christopher.umphlett@gmail.com"))
+Description: Facilitates making a connection to the 
+  'Zoom' API and executing various queries. You can use it to
+  __. The 'Zoom' documentation is 
+  available at <>. This package is not supported by 
+  'Zoom' (owner of the software).
+URL: https://github.com/chrisumphlett/zoomr
+BugReports: https://github.com/chrisumphlett/zoomr/issues
+License: CC0
+Encoding: UTF-8
+Imports:
+  dplyr (>= 1.0.0),
+  magrittr (>= 1.5),
+  jsonlite (>= 1.6.1),
+  purrr (>= 0.3.3),
+  httr (>= 1.4.1),
+  tidyr (>= 1.0.0),
+  plyr (>= 1.8.6)
+RoxygenNote: 7.1.2
