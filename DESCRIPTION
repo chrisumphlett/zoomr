@@ -21,5 +21,6 @@ Imports:
   jsonlite (>= 1.6.1),
   httr (>= 1.4.1),
   glue (>= 1.4.2),
-  rlang (>= 1.0.4)
+  rlang (>= 1.0.4),
+  tidyr (>= 1.1.4)
 RoxygenNote: 7.1.2
