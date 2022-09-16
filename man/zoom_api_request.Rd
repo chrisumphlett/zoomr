@@ -10,6 +10,7 @@ zoom_api_request(
   body = NULL,
   as = c("parsed", "raw"),
   token,
+  query_params = query_params,
   ...
 )
 }
