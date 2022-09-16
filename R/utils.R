@@ -194,6 +194,7 @@ zoom_api_request <-
     cnt <-
       httr::content(
         x = res,
+        "text",
         ...
       )
 

@@ -31,7 +31,7 @@ get_webinar_details <- function(webinar_id,
                             webinar_id = webinar_id)
 
     # Send GET request to specific survey
-    resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token)
+    resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
     
     # get into a data frame
     resp2 <- resp[-13]
