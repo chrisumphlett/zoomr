@@ -1,6 +1,6 @@
 #' Get Webinar Participants
 #' 
-#' Get metadata about a single webinar.
+#' Get participant info about a single webinar.
 #' 
 #' @param webinar_id Zoom Webinar Id, typically an 11 digit number.
 #' @param account_id Account Id granted by the Zoom developer app.
@@ -41,26 +41,26 @@ get_webinar_participants <- function(webinar_id,
   
   # while (page_counter <= total_pages) {
     # Send GET request to specific survey
-  message(cat(zoom_api_request(verb = "GET",
-                       url = api_url,
-                       token = access_token,
-                       query_params = api_query_params
-  )))
+  # message(paste0(zoom_api_request(verb = "GET",
+  #                      url = api_url,
+  #                      token = access_token,
+  #                      query_params = api_query_params
+  # )))
     resp <- zoom_api_request(verb = "GET",
                              url = api_url,
                              token = access_token,
-                             query_params = api_query_params
+                             query_params = list(page_size = 300)#api_query_params
                              )
-    elements <- append(elements, resp)
-    page_counter <- page_counter + 1
-    total_pages <- 10
+    # elements <- append(elements, resp)
+    # page_counter <- page_counter + 1
+    # total_pages <- 10
     
   # }
   
 
-  # # get into a data frame
-  # resp2 <- resp[-13]
-  # 
-  # df <- as.data.frame(resp2)
- return(resp) 
+  # get into a data frame
+  resp2 <- resp[-13]
+
+  df <- as.data.frame(jsonlite::fromJSON(resp2, flatten = TRUE))
+ return(df) 
 }
