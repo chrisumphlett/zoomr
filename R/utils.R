@@ -139,10 +139,7 @@ generate_query_params <-
     params_template <-
       switch(
         query,
-        getwebinardetails = "",
         getwebinarparticipants = "list(page_size = 300)",
-        getwebinarqanda = "{rooturl}/report/webinars/{webinar_id}/qa",
-        getwebinarpolls = "{rooturl}/report/webinars/{webinar_id}/polls",
         rlang::abort("Internal error: invalid query parameters generation")
       )
     
