@@ -26,6 +26,10 @@ get_webinar_qanda <- function(webinar_id,
                            client_id,
                            client_secret)
 {
+  
+  . <- NA # prevent variable binding note for the dot
+  
+  
   # Get new access token
   access_token <- get_access_token(account_id, client_id, client_secret)
   
@@ -36,7 +40,13 @@ get_webinar_qanda <- function(webinar_id,
   # Send GET request to specific survey
   resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
   
-  df <- as.data.frame(jsonlite::fromJSON(resp, flatten = TRUE)) %>%
-    tidyr::unnest("questions.question_details")
-  
+  df <- as.data.frame(jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)) %>%
+    tidyr::unnest("questions.question_details") %>%
+    janitor::clean_names() %>%
+    dplyr::select(-c(
+      .data$page_size,
+      .data$next_page_token,
+      .data$total_records
+    )
+    )
 }

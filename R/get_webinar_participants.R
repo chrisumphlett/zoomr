@@ -23,6 +23,10 @@ get_webinar_participants <- function(webinar_id,
                                 client_id,
                                 client_secret)
 {
+  
+  . <- NA # prevent variable binding note for the dot
+  
+  
   # Get new access token
   access_token <- get_access_token(account_id, client_id, client_secret)
   
@@ -30,7 +34,7 @@ get_webinar_participants <- function(webinar_id,
   api_url <- generate_url(query = "getwebinarparticipants",
                           webinar_id = webinar_id)
   
-  api_query_params <- generate_query_params(query = "getwebinarparticipants")
+  # api_query_params <- generate_query_params(query = "getwebinarparticipants")
   # message(api_query_params)
   
   elements <- list()
@@ -58,9 +62,19 @@ get_webinar_participants <- function(webinar_id,
   # }
   
 
-  # get into a data frame
-  resp2 <- resp[-13]
-
-  df <- as.data.frame(jsonlite::fromJSON(resp2, flatten = TRUE))
+    # get into a data frame
+    df <- as.data.frame(jsonlite::fromJSON(
+                          httr::content(resp, "text"),
+                          flatten = TRUE
+                          )
+                        ) %>%
+      janitor::clean_names() %>%
+      dplyr::select(-c(
+        .data$page_size,
+        .data$next_page_token,
+        .data$total_records
+                      )
+                    )
+#}
  return(df) 
 }

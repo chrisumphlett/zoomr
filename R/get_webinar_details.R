@@ -23,6 +23,10 @@ get_webinar_details <- function(webinar_id,
                                 client_id,
                                 client_secret)
   {
+  
+  . <- NA # prevent variable binding note for the dot
+  
+  
     # Get new access token
     access_token <- get_access_token(account_id, client_id, client_secret)
 
@@ -34,8 +38,9 @@ get_webinar_details <- function(webinar_id,
     resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
     
     # get into a data frame
-    resp2 <- resp[-13]
-    
-    df <- as.data.frame(resp2)
-    
+    cnt <- httr::content(resp)
+    cnt2 <- cnt[-13]
+    df <- as.data.frame(cnt2) %>%
+      janitor::clean_names()
+
 }

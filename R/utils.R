@@ -104,6 +104,8 @@ generate_url <-
         getwebinarparticipants = "{rooturl}/report/webinars/{webinar_id}/participants",
         getwebinarqanda = "{rooturl}/report/webinars/{webinar_id}/qa",
         getwebinarpolls = "{rooturl}/report/webinars/{webinar_id}/polls",
+        listwebinars = "{rooturl}/users/{user_id}/webinars",
+        getwebinarregistrants = "{rooturl}/webinars/{webinar_id}/registrants",
         rlang::abort("Internal error: invalid URL generation query")
       )
 
@@ -195,5 +197,6 @@ zoom_api_request <-
         ...
       )
 
-    return(cnt)
+    # return(cnt)
+    return(res)
   }
