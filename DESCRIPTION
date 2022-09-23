@@ -22,5 +22,6 @@ Imports:
   httr (>= 1.4.1),
   glue (>= 1.4.2),
   rlang (>= 1.0.4),
-  tidyr (>= 1.1.4)
+  tidyr (>= 1.1.4),
+  janitor (>= 2.1.0)
 RoxygenNote: 7.1.2
