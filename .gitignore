@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 hold.R
 test.R
+
+# any text files that I'm using for test output right now
+*.txt
