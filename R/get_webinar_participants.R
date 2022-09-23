@@ -7,6 +7,12 @@
 #' @param client_id Client Id granted by the Zoom developer app.
 #' @param client_secret Client secret granted by the Zoom developer app.
 #' 
+#' @importFrom magrittr "%>%"
+#' @importFrom tidyselect "everything"
+#' @import dplyr
+#' @importFrom janitor "clean_names"
+#' @importFrom purrr "map_dfr"
+#' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export
@@ -43,38 +49,34 @@ get_webinar_participants <- function(webinar_id,
   
   total_pages <- 1
   
-  # while (page_counter <= total_pages) {
-    # Send GET request to specific survey
-  # message(paste0(zoom_api_request(verb = "GET",
-  #                      url = api_url,
-  #                      token = access_token,
-  #                      query_params = api_query_params
-  # )))
+  next_token <- ""
+  while (next_token != "STOP") {
     resp <- zoom_api_request(verb = "GET",
                              url = api_url,
                              token = access_token,
-                             query_params = list(page_size = 300)#api_query_params
-                             )
-    # elements <- append(elements, resp)
+                             query_params = list(page_size = 300,
+                                                 next_page_token = next_token)#api_query_params
+    )
+    resp2 <- jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)
+    next_token <- dplyr::if_else(resp2$next_page_token == "", "STOP", resp2$next_page_token)
+    elements <- append(elements, httr::content(resp, "text"))
     # page_counter <- page_counter + 1
-    # total_pages <- 10
-    
-  # }
+  }
+  # return(elements)
   
-
-    # get into a data frame
-    df <- as.data.frame(jsonlite::fromJSON(
-                          httr::content(resp, "text"),
-                          flatten = TRUE
-                          )
-                        ) %>%
-      janitor::clean_names() %>%
-      dplyr::select(-c(
-        .data$page_size,
-        .data$next_page_token,
-        .data$total_records
-                      )
-                    )
-#}
- return(df) 
+  list_to_df <- function(.x) {
+    df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
+      dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+  }
+  
+  df <- purrr::map_dfr(elements, list_to_df) %>%
+    janitor::clean_names() %>%
+    dplyr::select(-c(
+      .data$page_size,
+      .data$next_page_token,
+      .data$page_count,
+      .data$total_records
+    )
+    )
+  return(df)
 }
