@@ -1,3 +1,3 @@
-# zoomr 0.0.0.9999
+# zoomr 0.1.0
 
-* 
+* First version.

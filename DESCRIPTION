@@ -1,6 +1,6 @@
 Package: zoomr
 Title: Connect to Your 'Zoom' Data with R!
-Version: 0.0.0.9999
+Version: 0.1.0
 Authors@R: 
     c(person(given = "Chris",
            family = "Umphlett",
