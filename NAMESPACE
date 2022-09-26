@@ -2,6 +2,7 @@
 
 export(generate_query_params)
 export(generate_url)
+export(get_account_users)
 export(get_panelists)
 export(get_registration_questions)
 export(get_webinar_details)
