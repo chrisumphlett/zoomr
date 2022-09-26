@@ -41,8 +41,6 @@ get_webinar_polls <- function(webinar_id,
   
   # Send GET request to specific survey
   resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
-  
-  return(resp)
 
   df <- as.data.frame(jsonlite::fromJSON(
                         httr::content(resp, "text"),
