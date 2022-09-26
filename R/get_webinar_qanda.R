@@ -40,9 +40,16 @@ get_webinar_qanda <- function(webinar_id,
                           webinar_id = webinar_id)
   
   # Send GET request to specific survey
-  resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
+  resp <- zoom_api_request(verb = "GET",
+                           url = api_url,
+                           token = access_token,
+                           query_params = "")
   
-  df <- as.data.frame(jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)) %>%
+  df <- as.data.frame(jsonlite::fromJSON(
+    httr::content(resp, "text"),
+    flatten = TRUE
+  )
+  ) %>%
     tidyr::unnest("questions.question_details") %>%
     janitor::clean_names() %>%
     dplyr::select(-c(
