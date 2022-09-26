@@ -41,6 +41,8 @@ get_webinar_polls <- function(webinar_id,
   
   # Send GET request to specific survey
   resp <- zoom_api_request(verb = "GET", url = api_url, token = access_token, query_params = "")
+  
+  return(resp)
 
   df <- as.data.frame(jsonlite::fromJSON(
                         httr::content(resp, "text"),
@@ -48,11 +50,5 @@ get_webinar_polls <- function(webinar_id,
                         )
                       ) %>%
     tidyr::unnest("questions.question_details") %>%
-    janitor::clean_names() %>%
-    dplyr::select(-c(
-      .data$page_size,
-      .data$next_page_token,
-      .data$total_records
-    )
-    )
+    janitor::clean_names() 
 }

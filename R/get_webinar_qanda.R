@@ -51,11 +51,5 @@ get_webinar_qanda <- function(webinar_id,
   )
   ) %>%
     tidyr::unnest("questions.question_details") %>%
-    janitor::clean_names() %>%
-    dplyr::select(-c(
-      .data$page_size,
-      .data$next_page_token,
-      .data$total_records
-    )
-    )
+    janitor::clean_names() 
 }
