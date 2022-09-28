@@ -45,11 +45,18 @@ get_webinar_qanda <- function(webinar_id,
                            token = access_token,
                            query_params = "")
   
-  df <- as.data.frame(jsonlite::fromJSON(
-    httr::content(resp, "text"),
-    flatten = TRUE
-  )
-  ) %>%
-    tidyr::unnest("questions.question_details") %>%
-    janitor::clean_names() 
+  # check if it is empty (applicable data not available for this webinar)
+  if(length(httr::content(resp)$questions) == 0){
+    message("Zoom API returned no Q&A results for this webinar")
+    return(list())
+  } else {
+    df <- as.data.frame(jsonlite::fromJSON(
+      httr::content(resp, "text"),
+      flatten = TRUE
+    )
+    ) %>%
+      tidyr::unnest("questions.question_details") %>%
+      janitor::clean_names()
+    return(df)
+  }
 }
