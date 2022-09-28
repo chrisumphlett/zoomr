@@ -23,13 +23,15 @@ zoom_response_codes <-
           c("Zoom API reported an invalid request (300):",
             "The next page token is invalid or expired."),
         `400` =
-          c("Zoom API reported an invalid request (300):",
+          c("Zoom API reported an invalid request:",
             "Bad Request."),
         `3001` =
           c("Zoom API reported an invalid request (3001):",
             "Meeting/Webinar ID does not exist"),
         `401` =
           c("Zoom API reported an invalid access token (401)"),
+        `404` =
+          c("Zoom API reported webinar Id is not found or has expired."),
         # Default response for unknown status code:
         c(glue::glue("Zoom API reported an atypical status code {res$status_code}"),
           glue::glue("Full response: {res}"),
@@ -60,6 +62,10 @@ get_access_token <-
     request <- httr::POST(
       url = url,
       httr::authenticate(client_id, client_secret))
+    
+    # Check if response type is OK
+    zoom_response_codes(request)
+    
     token <- httr::content(request)$access_token
     
     return(token)
@@ -183,9 +189,9 @@ zoom_api_request <-
         "Authorization" = paste0("Bearer ", token)
       ),
       # body = body,
-      times = 2,
-      # terminate_on = 400:451,
-      quiet = TRUE,
+      times = 3,
+      terminate_on = 400:451,
+      quiet = FALSE,
       query = query_params
     )
     # Check if response type is OK
