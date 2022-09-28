@@ -191,7 +191,7 @@ zoom_api_request <-
       # body = body,
       times = 3,
       terminate_on = 400:451,
-      quiet = FALSE,
+      quiet = TRUE,
       query = query_params
     )
     # Check if response type is OK
