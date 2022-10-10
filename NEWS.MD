@@ -1,3 +1,8 @@
+# zoomr 0.0.2.9000
+
+* dev version
+
+
 # zoomr 0.0.2
 
 * `get_registration_questions()` updated for the case where a webinar does not have any registration question responses.
