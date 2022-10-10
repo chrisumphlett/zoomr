@@ -1,6 +1,9 @@
 # zoomr 0.0.2
 
 * `get_registration_questions()` updated for the case where a webinar does not have any registration question responses.
+* Added a lot of `@import` and `@importFrom` comments to the Roxygen2 documentation.
+* Removed some unneeded, commented out code.
+* Updated some examples that referred to the wrong functions.
 
 
 # zoomr 0.0.1
