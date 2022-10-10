@@ -11,13 +11,15 @@
 #' @importFrom tidyr "unnest"
 #' @importFrom janitor "clean_names"
 #' @import dplyr
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_qanda(webinarID = "99911112222",
+#' dat <- get_webinar_panelists(webinarID = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
 #'   your_client_secret)

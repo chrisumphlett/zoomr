@@ -10,7 +10,8 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom tidyr "unnest"
 #' @importFrom janitor "clean_names"
-#' @import dplyr
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.

@@ -13,14 +13,15 @@
 #' @import dplyr
 #' @importFrom janitor "clean_names"
 #' @importFrom purrr "map_dfr"
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_participants(webinarID = "99911112222",
-#'   your_account_id,
+#' dat <- get_account_users(your_account_id,
 #'   your_client_id,
 #'   your_client_secret)
 #' }

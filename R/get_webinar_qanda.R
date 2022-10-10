@@ -10,7 +10,8 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom tidyr "unnest"
 #' @importFrom janitor "clean_names"
-#' @import dplyr
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
@@ -30,7 +31,6 @@ get_webinar_qanda <- function(webinar_id,
 {
   
   . <- NA # prevent variable binding note for the dot
-  
   
   # Get new access token
   access_token <- get_access_token(account_id, client_id, client_secret)

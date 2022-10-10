@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_registration_questions.R
 \name{get_registration_questions}
 \alias{get_registration_questions}
-\title{Get Webinar Registrants}
+\title{Get Webinar Registration Question Responses}
 \usage{
 get_registration_questions(webinar_id, account_id, client_id, client_secret)
 }
@@ -20,7 +20,7 @@ Get registrant info about a single webinar.
 }
 \examples{
 \dontrun{
-dat <- get_webinar_participants(webinarID = "99911112222",
+dat <- get_registration_questions(webinarID = "99911112222",
   your_account_id,
   your_client_id,
   your_client_secret)

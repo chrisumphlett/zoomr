@@ -52,6 +52,9 @@ zoom_response_codes <-
 #' @param account_id Zoom API app Account Id.
 #' @param client_id Zoom API app Client Id.
 #' @param client_secret Zoom API app Client Secret.
+#' 
+#' @import httr 
+#'
 #' @keywords internal
 
 get_access_token <-
@@ -167,6 +170,9 @@ generate_query_params <-
 #' @param verb Type of request to be sent (@seealso [httr::VERB()])
 #' @param url Zoom endpoint URL created by [generate_url()] functions
 #' @param ... arguments passed to httr::content when parsing
+#' 
+#' @import httr
+#' 
 #' @keywords internal
 
 zoom_api_request <-

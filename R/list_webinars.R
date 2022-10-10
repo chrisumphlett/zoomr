@@ -8,6 +8,12 @@
 #' @param client_id Client Id granted by the Zoom developer app.
 #' @param client_secret Client secret granted by the Zoom developer app.
 #' 
+#' @importFrom dplyr "select"
+#' @importFrom magrittr "%>%"
+#' @importFrom janitor "clean_names"
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
+#' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export

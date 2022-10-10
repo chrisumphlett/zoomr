@@ -20,7 +20,7 @@ Get registrant info about a single webinar.
 }
 \examples{
 \dontrun{
-dat <- get_webinar_participants(webinarID = "99911112222",
+dat <- get_webinar_registrants(webinarID = "99911112222",
   your_account_id,
   your_client_id,
   your_client_secret)

@@ -12,13 +12,15 @@
 #' @import dplyr
 #' @importFrom janitor "clean_names"
 #' @importFrom purrr "map_dfr"
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_participants(webinarID = "99911112222",
+#' dat <- get_webinar_registrants(webinarID = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
 #'   your_client_secret)
@@ -55,9 +57,7 @@ get_webinar_registrants <- function(webinar_id,
     resp2 <- jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)
     next_token <- dplyr::if_else(resp2$next_page_token == "", "STOP", resp2$next_page_token)
     elements <- append(elements, httr::content(resp, "text"))
-    # page_counter <- page_counter + 1
   }
-  # return(elements)
   
   list_to_df <- function(.x) {
     df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%

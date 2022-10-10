@@ -1,4 +1,4 @@
-#' Get Webinar Registrants
+#' Get Webinar Registration Question Responses
 #' 
 #' Get registrant info about a single webinar.
 #' 
@@ -8,16 +8,18 @@
 #' @param client_secret Client secret granted by the Zoom developer app.
 #' 
 #' @importFrom magrittr "%>%"
-#' @importFrom dplyr "select"
-#' @importFrom dplyr "rename"
+#' @import dplyr
+#' @importFrom tidyr "unnest"
 #' @importFrom janitor "clean_names"
+#' @importFrom jsonlite "fromJSON"
+#' @importFrom httr "content"
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_participants(webinarID = "99911112222",
+#' dat <- get_registration_questions(webinarID = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
 #'   your_client_secret)
