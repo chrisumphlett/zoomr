@@ -43,38 +43,37 @@ get_registration_questions <- function(webinar_id,
   
   elements <- list()
   
-  page_counter <- 1
+  next_token <- ""
+  while (next_token != "STOP") {
+    resp <- zoom_api_request(verb = "GET",
+                             url = api_url,
+                             token = access_token,
+                             query_params = list(page_size = 300,
+                                                 next_page_token = next_token)#api_query_params
+    )
+    resp2 <- jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)
+    next_token <- dplyr::if_else(resp2$next_page_token == "", "STOP", resp2$next_page_token)
+    elements <- append(elements, httr::content(resp, "text"))
+  }
+  # return(elements)
   
-  total_pages <- 1
+  list_to_df <- function(.x) {
+    df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
+      tidyr::unnest(.data$registrants.custom_questions) %>%
+      dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+    
+    if("title" %in% colnames(df)) {
+      df2 <- df %>%
+        dplyr::select(.data$registrants.id, .data$registrants.email, .data$title, .data$value) %>%
+        dplyr::rename(question = .data$title, response = .data$value) %>%
+        janitor::clean_names()
+      return(df2)
+    } else {
+      message(paste0("Zoom API did not return any registration question ",
+                     "responses for selected Webinar Id"))
+    }
+  }
   
-  # while (page_counter <= total_pages) {
-  # Send GET request to specific survey
-  # message(paste0(zoom_api_request(verb = "GET",
-  #                      url = api_url,
-  #                      token = access_token,
-  #                      query_params = api_query_params
-  # )))
-  resp <- zoom_api_request(verb = "GET",
-                           url = api_url,
-                           token = access_token,
-                           query_params = list(page_size = 300)#api_query_params
-  )
-  # elements <- append(elements, resp)
-  # page_counter <- page_counter + 1
-  # total_pages <- 10
-  
-  # }
-  
-  
-  # get into a data frame
-  df <- as.data.frame(jsonlite::fromJSON(
-    httr::content(resp, "text"),
-    flatten = TRUE
-  )
-  ) %>%
-    tidyr::unnest(.data$registrants.custom_questions) %>%
-    dplyr::select(.data$registrants.id, .data$registrants.email, .data$title, .data$value) %>%
-    dplyr::rename(question = .data$title, response = .data$value) %>%
-    janitor::clean_names()
-  return(df) 
+  reg_q <- purrr::map_dfr(elements, list_to_df)
+  return(reg_q)
 }
