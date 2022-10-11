@@ -1,6 +1,6 @@
-# zoomr 0.0.2.9000
+# zoomr 0.0.3
 
-* dev version
+* Handle API errors for the registrants endpoint when a webinar does not have any registrants. Both `get_registration_questions()` and `get_webinar_registrants()` will print a message to the console if there are no registrants but the webinar Id is found.
 
 
 # zoomr 0.0.2
