@@ -47,6 +47,7 @@ get_webinar_registrants <- function(webinar_id,
   elements <- list()
   
   next_token <- ""
+  skip <- ""
   while (next_token != "STOP") {
     resp <- zoom_api_request(verb = "GET",
                              url = api_url,
@@ -54,24 +55,31 @@ get_webinar_registrants <- function(webinar_id,
                              query_params = list(page_size = 300,
                                                  next_page_token = next_token)#api_query_params
     )
-    resp2 <- jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)
-    next_token <- dplyr::if_else(resp2$next_page_token == "", "STOP", resp2$next_page_token)
-    elements <- append(elements, httr::content(resp, "text"))
+    if(jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)$total_records == 0) {
+      message("Webinar Id is found but there are not any registrants")
+      next_token <- "STOP"
+      skip <- "YES"
+    } else {
+      resp2 <- jsonlite::fromJSON(httr::content(resp, "text"), flatten = TRUE)
+      next_token <- dplyr::if_else(resp2$next_page_token == "", "STOP", resp2$next_page_token)
+      elements <- append(elements, httr::content(resp, "text"))
+      skip <- "NO"
+    }
   }
   
-  list_to_df <- function(.x) {
-    df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
-      dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+  if(skip != "YES"){
+    list_to_df <- function(.x) {
+      df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
+        dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+    }
+    df <- purrr::map_dfr(elements, list_to_df) %>%
+      janitor::clean_names() %>%
+      dplyr::select(-c(
+        .data$registrants_custom_questions,
+        .data$page_size,
+        .data$next_page_token,
+        .data$total_records
+      ))
+    return(df)
   }
-
-  df <- purrr::map_dfr(elements, list_to_df) %>%
-    janitor::clean_names() %>%
-    dplyr::select(-c(
-      .data$registrants_custom_questions,
-      .data$page_size,
-      .data$next_page_token,
-      .data$total_records
-                    )
-                  )
-  return(df)
 }
