@@ -1,6 +1,7 @@
 ## Initial Release
 
-* T
+* Initial release to CRAN.
+
 
 ## Test environments
 
@@ -10,6 +11,9 @@
 
 
 ## R CMD check results
-0 errors √ | 0 warning x | 0 notes √
+
+* On `devtools::check()`: 0 errors √ | 0 warning x | 0 notes √
+* On `devtools::check_rhub()` there is a NOTE I haven't seen before, and which others online are dismissing. This occur ONLY on Fedora Linux (R-hub): `checking HTML version of manual ... NOTE Skipping checking HTML validation: no command 'tidy' found.`
+
 
 ## No reverse dependencies

@@ -1,6 +1,6 @@
-# zoomr 0.0.3.9000
+# zoomr 0.1.0
 
-* current dev version
+* Publishing to CRAN. Performed final re-checks and cleanup.
 
 
 # zoomr 0.0.3
