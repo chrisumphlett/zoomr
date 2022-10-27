@@ -88,7 +88,6 @@ get_access_token <-
 #'
 #' @return Endpoint URL to be passed to querying tools
 #' @keywords internal
-#' @export
 
 generate_url <-
   function(query, ...){
@@ -139,7 +138,6 @@ generate_url <-
 #'
 #' @return Query parameters to be passed to querying tools
 #' @keywords internal
-#' @export
 
 generate_query_params <-
   function(query, ...){
