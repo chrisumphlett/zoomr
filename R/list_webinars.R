@@ -1,6 +1,6 @@
 #' Get List of Webinars for a User.
 #' 
-#' Get List of Webinars for a User. This is used to get the webinar Id's to
+#' Get list of webinars for a User. This is used to get the webinar Id's to
 #' pass into other functions.
 #' 
 #' @param user_id Zoom User Id.
@@ -13,6 +13,8 @@
 #' @importFrom janitor "clean_names"
 #' @importFrom jsonlite "fromJSON"
 #' @importFrom httr "content"
+#' 
+#' @return A data frame with all of the webinars hosted by a specific user.
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.

@@ -15,8 +15,11 @@ list_webinars(user_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with all of the webinars hosted by a specific user.
+}
 \description{
-Get List of Webinars for a User. This is used to get the webinar Id's to
+Get list of webinars for a User. This is used to get the webinar Id's to
 pass into other functions.
 }
 \examples{

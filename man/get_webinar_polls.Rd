@@ -15,6 +15,9 @@ get_webinar_polls(webinar_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with poll results from a webinar.
+}
 \description{
 Get the polls summary from a single webinar.
 }

@@ -15,6 +15,9 @@ get_webinar_qanda(webinar_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with all of the Q&A data from a webinar.
+}
 \description{
 Get the Q&A summary from a single webinar.
 }

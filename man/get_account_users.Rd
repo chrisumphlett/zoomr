@@ -13,6 +13,9 @@ get_account_users(account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with the list of all users in the account.
+}
 \description{
 Get all users in a zoom account. The user id is required to get a list of
 webinars hosted by a particular user.

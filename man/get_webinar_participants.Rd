@@ -15,6 +15,9 @@ get_webinar_participants(webinar_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with data on each participant at a webinar.
+}
 \description{
 Get participant info about a single webinar.
 }

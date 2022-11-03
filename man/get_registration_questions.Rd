@@ -15,8 +15,11 @@ get_registration_questions(webinar_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with the registration question answers.
+}
 \description{
-Get registrant info about a single webinar.
+Get registration question answers from all registrants for a single webinar.
 }
 \examples{
 \dontrun{

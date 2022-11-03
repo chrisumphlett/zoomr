@@ -1,6 +1,6 @@
 #' Get Webinar Registration Question Responses
 #' 
-#' Get registrant info about a single webinar.
+#' Get registration question answers from all registrants for a single webinar.
 #' 
 #' @param webinar_id Zoom Webinar Id, typically an 11 digit number.
 #' @param account_id Account Id granted by the Zoom developer app.
@@ -13,6 +13,8 @@
 #' @importFrom janitor "clean_names"
 #' @importFrom jsonlite "fromJSON"
 #' @importFrom httr "content"
+#' 
+#' @return A data frame with the registration question answers.
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.

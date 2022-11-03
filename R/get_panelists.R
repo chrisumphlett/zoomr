@@ -1,6 +1,6 @@
 #' Get Webinar Panelists
 #' 
-#' Get the list of panelists from a single webinar.
+#' Get the list of attendees who were also panelists from a single webinar.
 #' 
 #' @param webinar_id Zoom Webinar Id, typically an 11 digit number.
 #' @param account_id Account Id granted by the Zoom developer app.
@@ -13,6 +13,8 @@
 #' @import dplyr
 #' @importFrom jsonlite "fromJSON"
 #' @importFrom httr "content"
+#' 
+#' @return A data frame with the list of panelists from that webinar.
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.

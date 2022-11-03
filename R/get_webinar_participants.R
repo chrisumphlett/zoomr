@@ -15,6 +15,8 @@
 #' @importFrom jsonlite "fromJSON"
 #' @importFrom httr "content"
 #' 
+#' @return A data frame with data on each participant at a webinar.
+#' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
 #' @export

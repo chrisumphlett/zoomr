@@ -15,8 +15,11 @@ get_panelists(webinar_id, account_id, client_id, client_secret)
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
+\value{
+A data frame with the list of panelists from that webinar.
+}
 \description{
-Get the list of panelists from a single webinar.
+Get the list of attendees who were also panelists from a single webinar.
 }
 \examples{
 \dontrun{
