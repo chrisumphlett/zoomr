@@ -1,8 +1,4 @@
-# zoomr 0.1.0.9000
-
-* Dev version on GH.
-
-# zoomr 0.1.0
+1# zoomr 0.1.0
 
 * Publishing to CRAN. Performed final re-checks and cleanup.
 

@@ -1,6 +1,7 @@
 ## Initial Release
 
 * Initial release to CRAN.
+* Second submission, removed "with R!" from title and added \value tag to exported functions.
 
 
 ## Test environments
