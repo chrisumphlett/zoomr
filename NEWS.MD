@@ -1,4 +1,9 @@
-1# zoomr 0.1.0
+# zoomr 0.1.0.9000
+
+* Development version
+* Added status query parameter to `get_webinar_registrants()`. From what I can tell the Zoom API endpoint is not set up correctly to retrieve registrants who cancel. 'Cancelled' is not one of the status values that is available. Neither 'pending' nor 'denied' return the cancelled registrants. Cancelled registrants are available via the manual exports in Zoom.
+
+# zoomr 0.1.0
 
 * Publishing to CRAN. Performed final re-checks and cleanup.
 
