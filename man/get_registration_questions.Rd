@@ -4,7 +4,13 @@
 \alias{get_registration_questions}
 \title{Get Webinar Registration Question Responses}
 \usage{
-get_registration_questions(webinar_id, account_id, client_id, client_secret)
+get_registration_questions(
+  webinar_id,
+  account_id,
+  client_id,
+  client_secret,
+  registrant_status = c("approved")
+)
 }
 \arguments{
 \item{webinar_id}{Zoom Webinar Id, typically an 11 digit number.}
@@ -14,6 +20,9 @@ get_registration_questions(webinar_id, account_id, client_id, client_secret)
 \item{client_id}{Client Id granted by the Zoom developer app.}
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
+
+\item{registrant_status}{One or more of "approved", "pending", or
+"denied". Default is "approved" only.}
 }
 \value{
 A data frame with the registration question answers.
@@ -23,10 +32,11 @@ Get registration question answers from all registrants for a single webinar.
 }
 \examples{
 \dontrun{
-dat <- get_registration_questions(webinarID = "99911112222",
+dat <- get_registration_questions(webinar_id = "99911112222",
   your_account_id,
   your_client_id,
-  your_client_secret)
+  your_client_secret,
+  c("approved", "denied", "pending"))
 }
 }
 \seealso{
