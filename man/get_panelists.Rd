@@ -23,7 +23,7 @@ Get the list of attendees who were also panelists from a single webinar.
 }
 \examples{
 \dontrun{
-dat <- get_webinar_panelists(webinarID = "99911112222",
+dat <- get_webinar_panelists(webinar_id = "99911112222",
   your_account_id,
   your_client_id,
   your_client_secret)
