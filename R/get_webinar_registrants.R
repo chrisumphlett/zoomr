@@ -39,23 +39,21 @@ get_webinar_registrants <- function(webinar_id,
                                       c("approved")
                                     )
 {
-  
+
   . <- NA # prevent variable binding note for the dot
-  
+
   # Get new access token
   access_token <- get_access_token(account_id, client_id, client_secret)
-  
+
   # Function-specific API stuff
   api_url <- generate_url(query = "getwebinarregistrants",
                           webinar_id = webinar_id)
-  
+
   elements <- list()
-  
   next_token <- ""
   skip <- ""
-  
   status_options <- registrant_status
-  
+
   get_data_for_each_status <- function(.x){
     while (next_token != "STOP") {
       resp <- zoom_api_request(verb = "GET",
@@ -77,7 +75,7 @@ get_webinar_registrants <- function(webinar_id,
         skip <- "NO"
       }
     }
-    
+
     if(skip != "YES"){
       list_to_df <- function(.x) {
         df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
@@ -94,9 +92,8 @@ get_webinar_registrants <- function(webinar_id,
       return(df)
     }
   }
-  
+
   final_df <- purrr::map_dfr(status_options, get_data_for_each_status)
   return(final_df)
-  
 
 }
