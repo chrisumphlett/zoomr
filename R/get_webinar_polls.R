@@ -20,7 +20,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_polls(webinarID = "99911112222",
+#' dat <- get_webinar_polls(webinar_id = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
 #'   your_client_secret)

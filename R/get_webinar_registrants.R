@@ -24,10 +24,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_webinar_registrants(webinarID = "99911112222",
+#' dat <- get_webinar_registrants(webinar_id = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
-#'   your_client_secret)
+#'   your_client_secret,
+#'   c("approved", "denied", "pending"))
 #' }
 
 get_webinar_registrants <- function(webinar_id,

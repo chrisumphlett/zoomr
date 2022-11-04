@@ -6,6 +6,8 @@
 #' @param account_id Account Id granted by the Zoom developer app.
 #' @param client_id Client Id granted by the Zoom developer app.
 #' @param client_secret Client secret granted by the Zoom developer app.
+#' @param registrant_status One or more of "approved", "pending", or
+#' "denied". Default is "approved" only.
 #' 
 #' @importFrom magrittr "%>%"
 #' @import dplyr
@@ -21,10 +23,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- get_registration_questions(webinarID = "99911112222",
+#' dat <- get_registration_questions(webinar_id = "99911112222",
 #'   your_account_id,
 #'   your_client_id,
-#'   your_client_secret)
+#'   your_client_secret,
+#'   c("approved", "denied", "pending"))
 #' }
 
 get_registration_questions <- function(webinar_id,
