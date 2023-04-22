@@ -109,7 +109,7 @@ generate_url <-
       switch(
         query,
         getwebinardetails = "{rooturl}/report/webinars/{webinar_id}",
-        getwebinarparticipants = "{rooturl}/report/webinars/{webinar_id}/participants",
+        getwebinarparticipants = "{rooturl}/past_webinars/{webinar_id}/participants",
         getwebinarqanda = "{rooturl}/report/webinars/{webinar_id}/qa",
         getwebinarpolls = "{rooturl}/report/webinars/{webinar_id}/polls",
         listwebinars = "{rooturl}/users/{user_id}/webinars",
