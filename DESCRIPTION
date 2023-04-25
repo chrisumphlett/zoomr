@@ -9,7 +9,7 @@ Authors@R:
 Description: Facilitates making a connection to the 'Zoom' API and executing
   various queries. You can use it to get data on 'Zoom' webinars and 'Zoom'
   meetings. The 'Zoom' documentation is available at 
-  <https://marketplace.zoom.us/docs/api-reference/zoom-api/>. This package is 
+  <https://developers.zoom.us/docs/api/>. This package is 
   not supported by 'Zoom' (owner of the software).
 URL: https://github.com/chrisumphlett/zoomr
 BugReports: https://github.com/chrisumphlett/zoomr/issues
