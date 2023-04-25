@@ -1,3 +1,7 @@
+# zoomr 0.2.9.000
+
+* development version
+
 # zoomr 0.2.0
 
 * BREAKING CHANGE: Due to changes Zoom made to the endpoint that was used for `get_webinar_participants()`, a different endpoint is now being used. This endpoint returns different fields, and the resulting data frame will have different columns. Switching was important in order to restore the ability to use the `registrant_id` for a participant to join it back to the registration data.
