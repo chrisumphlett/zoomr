@@ -1,7 +1,6 @@
-## Initial Release
+## zoomr 0.2.0
 
-* Initial release to CRAN.
-* Second submission, removed "with R!" from title and added \value tag to exported functions.
+* BREAKING CHANGE: Due to changes Zoom made to the endpoint that was used for `get_webinar_participants()`, a different endpoint is now being used. This endpoint returns different fields, and the resulting data frame will have different columns. Switching was important in order to restore the ability to use the `registrant_id` for a participant to join it back to the registration data.
 
 
 ## Test environments
@@ -14,7 +13,6 @@
 ## R CMD check results
 
 * On `devtools::check()`: 0 errors √ | 0 warning x | 0 notes √
-* On `devtools::check_rhub()` there is a NOTE I haven't seen before, and which others online are dismissing. This occur ONLY on Fedora Linux (R-hub): `checking HTML version of manual ... NOTE Skipping checking HTML validation: no command 'tidy' found.`
 
 
 ## No reverse dependencies
