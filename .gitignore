@@ -40,6 +40,7 @@ vignettes/*.pdf
 
 hold.R
 test.R
+test httr2.R
 
 # any text files that I'm using for test output right now
 *.txt

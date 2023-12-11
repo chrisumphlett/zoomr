@@ -1,4 +1,4 @@
-# zoomr 0.2.9.000
+# zoomr 0.2.9000
 
 * development version
 
