@@ -12,3 +12,4 @@ get_tickets OLD.R
 ^\.github$
 hold.R
 test.R
+test_httr2.R

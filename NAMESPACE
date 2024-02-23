@@ -3,6 +3,7 @@
 export(get_account_users)
 export(get_panelists)
 export(get_registration_questions)
+export(get_tracking_sources)
 export(get_webinar_details)
 export(get_webinar_participants)
 export(get_webinar_polls)
