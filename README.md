@@ -22,3 +22,4 @@ An expected workflow would start with looking up the user Id's for webinar hosts
 -   `get_webinar_participants()`. Data on who attended the webinar.
 -   `get_panelists()`. Figure out which of your participants were actually panelists.
 -   `get_webinar_polls()` and `get_webinar_qanda()`: Poll and Q&A data from the webinar. *Post-webinar survey data is not available in the Zoom API as of 2022-09-28.*
+-   `get_tracking_sources()`. Get a summary of registrations and visitors by tracking source for a specific webinar.

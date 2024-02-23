@@ -1,6 +1,6 @@
-# zoomr 0.2.9000
+# zoomr 0.3.0
 
-* development version
+* Added `get_tracking_sources()` to retrieve visitor and registration count by tracking source for a webinar. 
 
 # zoomr 0.2.0
 

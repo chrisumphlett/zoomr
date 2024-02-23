@@ -116,6 +116,7 @@ generate_url <-
         getwebinarregistrants = "{rooturl}/webinars/{webinar_id}/registrants",
         getpanelists = "{rooturl}/webinars/{webinar_id}/panelists",
         getusers = "{rooturl}/users",
+        gettrackingsources = "{rooturl}/webinars/{webinar_id}/tracking_sources",
         rlang::abort("Internal error: invalid URL generation query")
       )
 
