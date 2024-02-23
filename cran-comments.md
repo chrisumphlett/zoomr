@@ -2,7 +2,6 @@
 
 * Added `get_tracking_sources()` to retrieve visitor and registration count by tracking source for a webinar. 
 
-
 ## Test environments
 
 * Developed on and tested with Windows 11, R 4.3

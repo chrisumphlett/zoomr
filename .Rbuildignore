@@ -13,3 +13,4 @@ get_tickets OLD.R
 hold.R
 test.R
 test_httr2.R
+^CRAN-SUBMISSION$
