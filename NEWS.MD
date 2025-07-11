@@ -1,3 +1,10 @@
+# zoomr 0.3.1
+
+* Added support for regular Zoom meetings (in addition to webinars)
+* Added `list_meetings()` to retrieve meetings for a user
+* Added `get_meeting_participants()` to get participant data from meetings  
+* Added `get_meeting_details()` to get meeting metadata and statistics
+
 # zoomr 0.3.0.9000
 
 * development version
