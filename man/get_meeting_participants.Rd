@@ -9,11 +9,12 @@ get_meeting_participants(
   account_id,
   client_id,
   client_secret,
-  page_size = 300
+  page_size = 300,
+  include_all_instances = FALSE
 )
 }
 \arguments{
-\item{meeting_id}{Zoom Meeting ID (from list_meetings). Note: Use meeting_id, not UUID.}
+\item{meeting_id}{Zoom Meeting ID (from list_meetings).}
 
 \item{account_id}{Account Id granted by the Zoom developer app.}
 
@@ -22,19 +23,33 @@ get_meeting_participants(
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 
 \item{page_size}{Number of records per page. Default is 300.}
+
+\item{include_all_instances}{For recurring meetings, whether to include participants 
+from all instances (TRUE) or just the most recent (FALSE). Default is FALSE for 
+backward compatibility.}
 }
 \value{
-A data frame with data on each participant at a meeting.
+A data frame with data on each participant at a meeting. For recurring 
+meetings with include_all_instances=TRUE, includes an additional column 
+'instance_date' to identify which occurrence each participant attended.
 }
 \description{
-Get participant info about a single meeting.
+Get participant info about a single meeting or all instances of a recurring meeting.
 }
 \examples{
 \dontrun{
+# Get participants from most recent instance only
 dat <- get_meeting_participants(meeting_id = "81753923023",
   your_account_id,
   your_client_id,
   your_client_secret)
+  
+# Get participants from ALL instances of a recurring meeting
+dat <- get_meeting_participants(meeting_id = "81753923023",
+  your_account_id,
+  your_client_id,
+  your_client_secret,
+  include_all_instances = TRUE)
 }
 }
 \seealso{

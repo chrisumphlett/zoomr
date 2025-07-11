@@ -1,3 +1,10 @@
+# zoomr 0.3.1.9000
+
+* Enhanced `get_meeting_participants()` with recurring meeting support:
+* Added `include_all_instances` parameter to get participants from all occurrences
+* Added `instance_date` column to identify specific meeting occurrences
+* Standardized column names between different API endpoints
+
 # zoomr 0.3.1
 
 * Added support for regular Zoom meetings (in addition to webinars)
