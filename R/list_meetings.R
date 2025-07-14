@@ -1,7 +1,7 @@
 #' Get List of Meetings for a User
 #' 
-#' Get list of meetings for a User. This is used to get the meeting Id's and UUIDs to
-#' pass into other functions.
+#' Get list of meetings for a User. This is used to get the meeting Id's and
+#' UUIDs to pass into other functions.
 #' 
 #' @param user_id Zoom User Id.
 #' @param account_id Account Id granted by the Zoom developer app.
@@ -11,7 +11,6 @@
 #' "live", "upcoming", or "previous_meetings". Default is "previous_meetings".
 #' @param page_size Number of records per page. Default is 300.
 #' 
-#' @importFrom dplyr "select"
 #' @importFrom magrittr "%>%"
 #' @importFrom tidyselect "everything"
 #' @import dplyr
@@ -22,7 +21,7 @@
 #' 
 #' @return A data frame with all of the meetings hosted by a specific user.
 #' 
-#' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
+#' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for
 #' documentation on the Zoom API.
 #' @export
 #' @examples
@@ -71,7 +70,10 @@ list_meetings <- function(user_id,
   
   list_to_df <- function(.x) {
     df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
-      dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+      dplyr::mutate(dplyr::across(
+        .cols = tidyselect::everything(), 
+        as.character)
+      )
   }
   
   df <- purrr::map_dfr(elements, list_to_df) %>%

@@ -24,17 +24,19 @@ get_meeting_participants(
 
 \item{page_size}{Number of records per page. Default is 300.}
 
-\item{include_all_instances}{For recurring meetings, whether to include participants 
-from all instances (TRUE) or just the most recent (FALSE). Default is FALSE for 
-backward compatibility.}
+\item{include_all_instances}{For recurring meetings, whether to include
+participants from all instances (TRUE) or just the most recent (FALSE).
+Default is FALSE for backward compatibility.}
 }
 \value{
-A data frame with data on each participant at a meeting. For recurring 
-meetings with include_all_instances=TRUE, includes an additional column 
-'instance_date' to identify which occurrence each participant attended.
+A data frame with data on each participant at a meeting. For
+recurring meetings with include_all_instances=TRUE, includes an additional
+column 'instance_date' to identify which occurrence each participant
+attended.
 }
 \description{
-Get participant info about a single meeting or all instances of a recurring meeting.
+Get participant info about a single meeting or all instances of a recurring
+meeting.
 }
 \examples{
 \dontrun{

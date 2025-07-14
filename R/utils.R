@@ -19,6 +19,9 @@ zoom_response_codes <-
           c("Zoom API reported an authentication error (4700):",
             "Your access token does not contain permission to access the",
             "requested API endpoint scopes."),
+        `4711` =
+          c("Zoom API reported an invalid access token (4711):",
+            "Invalid access token, does not contain required scopes."),
         `300` =
           c("Zoom API reported an invalid request (300):",
             "The next page token is invalid or expired."),

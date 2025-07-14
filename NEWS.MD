@@ -1,4 +1,4 @@
-# zoomr 0.3.1.9000
+# zoomr 0.4.0.9000
 
 * Enhanced `get_meeting_participants()` with recurring meeting support:
 * Added `include_all_instances` parameter to get participants from all occurrences

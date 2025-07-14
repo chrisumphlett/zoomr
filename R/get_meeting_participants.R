@@ -1,15 +1,16 @@
 #' Get Meeting Participants
 #' 
-#' Get participant info about a single meeting or all instances of a recurring meeting.
+#' Get participant info about a single meeting or all instances of a recurring
+#' meeting.
 #' 
 #' @param meeting_id Zoom Meeting ID (from list_meetings).
 #' @param account_id Account Id granted by the Zoom developer app.
 #' @param client_id Client Id granted by the Zoom developer app.
 #' @param client_secret Client secret granted by the Zoom developer app.
 #' @param page_size Number of records per page. Default is 300.
-#' @param include_all_instances For recurring meetings, whether to include participants 
-#' from all instances (TRUE) or just the most recent (FALSE). Default is FALSE for 
-#' backward compatibility.
+#' @param include_all_instances For recurring meetings, whether to include
+#' participants from all instances (TRUE) or just the most recent (FALSE).
+#' Default is FALSE for backward compatibility.
 #' 
 #' @importFrom magrittr "%>%"
 #' @importFrom tidyselect "everything"
@@ -23,9 +24,10 @@
 #' @importFrom httr "add_headers"
 #' @importFrom utils "URLencode"
 #' 
-#' @return A data frame with data on each participant at a meeting. For recurring 
-#' meetings with include_all_instances=TRUE, includes an additional column 
-#' 'instance_date' to identify which occurrence each participant attended.
+#' @return A data frame with data on each participant at a meeting. For
+#' recurring meetings with include_all_instances=TRUE, includes an additional
+#' column 'instance_date' to identify which occurrence each participant
+#' attended.
 #' 
 #' @seealso See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
 #' documentation on the Zoom API.
@@ -63,7 +65,8 @@ get_meeting_participants <- function(meeting_id,
     # For recurring meetings: get all instances and their participants
     
     # Step 1: Get all meeting instances
-    instances_url <- paste0("https://api.zoom.us/v2/past_meetings/", meeting_id, "/instances")
+    instances_url <- paste0("https://api.zoom.us/v2/past_meetings/", 
+                            meeting_id, "/instances")
     
     response_instances <- httr::GET(
       url = instances_url,
@@ -72,16 +75,30 @@ get_meeting_participants <- function(meeting_id,
     
     if (response_instances$status_code != 200) {
       # Fallback to single instance if instances endpoint fails
-      return(get_meeting_participants(meeting_id, account_id, client_id, client_secret, 
-                                      page_size, include_all_instances = FALSE))
+      return(get_meeting_participants(
+        meeting_id,
+        account_id,
+        client_id,
+        client_secret,
+        page_size,
+        include_all_instances = FALSE
+      ))
     }
     
-    instances_data <- jsonlite::fromJSON(httr::content(response_instances, "text"))
+    instances_data <- jsonlite::fromJSON(
+      httr::content(response_instances, "text")
+    )
     
     if (length(instances_data$meetings) == 0) {
       # No instances found, fallback to single meeting
-      return(get_meeting_participants(meeting_id, account_id, client_id, client_secret, 
-                                      page_size, include_all_instances = FALSE))
+      return(get_meeting_participants(
+        meeting_id,
+        account_id,
+        client_id,
+        client_secret,
+        page_size,
+        include_all_instances = FALSE
+      ))
     }
     
     instances_df <- as.data.frame(instances_data$meetings)
@@ -90,7 +107,8 @@ get_meeting_participants <- function(meeting_id,
     # Step 2: Get participants for each instance
     for (i in 1:nrow(instances_df)) {
       uuid_encoded <- URLencode(instances_df$uuid[i], reserved = TRUE)
-      participants_url <- paste0("https://api.zoom.us/v2/report/meetings/", uuid_encoded, "/participants")
+      participants_url <- paste0("https://api.zoom.us/v2/report/meetings/", 
+                                 uuid_encoded, "/participants")
       
       elements <- list()
       next_token <- ""
@@ -106,7 +124,9 @@ get_meeting_participants <- function(meeting_id,
         if (resp$status_code == 200) {
           resp_content <- httr::content(resp, "text")
           resp_data <- jsonlite::fromJSON(resp_content, flatten = TRUE)
-          next_token <- if(is.null(resp_data$next_page_token) || resp_data$next_page_token == "") "STOP" else resp_data$next_page_token
+          next_token <- if(is.null(resp_data$next_page_token) || 
+                           resp_data$next_page_token == "") "STOP" 
+                        else resp_data$next_page_token
           elements <- append(elements, resp_content)
         } else {
           next_token <- "STOP"
@@ -117,9 +137,13 @@ get_meeting_participants <- function(meeting_id,
         # Parse participants for this instance
         list_to_df <- function(.x) {
           participants_data <- jsonlite::fromJSON(.x, flatten = TRUE)
-          if (!is.null(participants_data$participants) && length(participants_data$participants) > 0) {
+          if (!is.null(participants_data$participants) && 
+              length(participants_data$participants) > 0) {
             df <- as.data.frame(participants_data$participants) %>%
-              dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+              dplyr::mutate(dplyr::across(
+                .cols = tidyselect::everything(), 
+                as.character)
+              )
             return(df)
           } else {
             return(data.frame())
@@ -130,24 +154,31 @@ get_meeting_participants <- function(meeting_id,
         
         if (nrow(instance_participants) > 0) {
           # Add instance information and standardize column names
-          instance_participants$instance_date <- format(as.Date(instances_df$start_time[i]), "%Y-%m-%d")
-          instance_participants$instance_start_time <- instances_df$start_time[i]
+          instance_participants$instance_date <- 
+            format(as.Date(instances_df$start_time[i]), "%Y-%m-%d")
+          instance_participants$instance_start_time <- 
+            instances_df$start_time[i]
           
           # Standardize column names to match original function
           if ("name" %in% names(instance_participants)) {
-            instance_participants$participants_name <- instance_participants$name
+            instance_participants$participants_name <- 
+              instance_participants$name
           }
           if ("duration" %in% names(instance_participants)) {
-            instance_participants$participants_duration <- instance_participants$duration
+            instance_participants$participants_duration <- 
+              instance_participants$duration
           }
           if ("join_time" %in% names(instance_participants)) {
-            instance_participants$participants_join_time <- instance_participants$join_time
+            instance_participants$participants_join_time <- 
+              instance_participants$join_time
           }
           if ("leave_time" %in% names(instance_participants)) {
-            instance_participants$participants_leave_time <- instance_participants$leave_time
+            instance_participants$participants_leave_time <- 
+              instance_participants$leave_time
           }
           if ("user_email" %in% names(instance_participants)) {
-            instance_participants$participants_user_email <- instance_participants$user_email
+            instance_participants$participants_user_email <- 
+              instance_participants$user_email
           }
           
           all_participants <- rbind(all_participants, instance_participants)
@@ -160,7 +191,12 @@ get_meeting_participants <- function(meeting_id,
         janitor::clean_names()
       
       # Remove pagination columns only if they exist
-      pagination_cols <- c("page_count", "page_size", "next_page_token", "total_records")
+      pagination_cols <- c(
+        "page_count",
+        "page_size",
+        "next_page_token",
+        "total_records"
+      )
       existing_pagination_cols <- intersect(pagination_cols, names(df))
       
       if (length(existing_pagination_cols) > 0) {
@@ -170,8 +206,14 @@ get_meeting_participants <- function(meeting_id,
       return(df)
     } else {
       # Fallback to single instance if no participants found
-      return(get_meeting_participants(meeting_id, account_id, client_id, client_secret, 
-                                      page_size, include_all_instances = FALSE))
+      return(get_meeting_participants(
+        meeting_id,
+        account_id,
+        client_id,
+        client_secret,
+        page_size,
+        include_all_instances = FALSE
+      ))
     }
     
   } else {
@@ -198,14 +240,22 @@ get_meeting_participants <- function(meeting_id,
     
     list_to_df <- function(.x) {
       df <- as.data.frame(jsonlite::fromJSON(.x, flatten = TRUE)) %>%
-        dplyr::mutate(dplyr::across(.cols = tidyselect::everything(), as.character))
+        dplyr::mutate(dplyr::across(
+          .cols = tidyselect::everything(), 
+          as.character)
+        )
     }
     
     df <- purrr::map_dfr(elements, list_to_df) %>%
       janitor::clean_names()
     
     # Remove pagination columns only if they exist
-    pagination_cols <- c("page_count", "page_size", "next_page_token", "total_records")
+    pagination_cols <- c(
+      "page_count",
+      "page_size",
+      "next_page_token",
+      "total_records"
+    )
     existing_pagination_cols <- intersect(pagination_cols, names(df))
     
     if (length(existing_pagination_cols) > 0) {

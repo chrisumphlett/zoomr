@@ -31,8 +31,8 @@ list_meetings(
 A data frame with all of the meetings hosted by a specific user.
 }
 \description{
-Get list of meetings for a User. This is used to get the meeting Id's and UUIDs to
-pass into other functions.
+Get list of meetings for a User. This is used to get the meeting Id's and
+UUIDs to pass into other functions.
 }
 \examples{
 \dontrun{
@@ -44,6 +44,6 @@ dat <- list_meetings(user_id = "user_id_string",
 }
 }
 \seealso{
-See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
+See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for
 documentation on the Zoom API.
 }
