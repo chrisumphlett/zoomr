@@ -22,7 +22,6 @@
 #' @importFrom httr "content"
 #' @importFrom httr "GET"
 #' @importFrom httr "add_headers"
-#' @importFrom utils "URLencode"
 #' 
 #' @return A data frame with data on each participant at a meeting. For
 #' recurring meetings with include_all_instances=TRUE, includes an additional
