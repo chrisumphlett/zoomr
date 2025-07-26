@@ -1,11 +1,21 @@
 Package: zoomr
 Title: Connect to Your 'Zoom' Data
-Version: 0.3.0.9000
+Version: 0.4.0.9000
 Authors@R: 
-    c(person(given = "Chris",
-           family = "Umphlett",
-           role = c("aut", "cre"),
-           email = "christopher.umphlett@gmail.com"))
+    c(
+      person(
+        given = "Chris",
+        family = "Umphlett",
+        role = c("aut", "cre"),
+        email = "christopher.umphlett@gmail.com"
+      ),
+      person(
+        given = "Paul",
+        family = "Schmidt",
+        role = c("ctb"),
+        email = "schmidtpaul1989@outlook.com"
+      )      
+    )
 Description: Facilitates making a connection to the 'Zoom' API and executing
   various queries. You can use it to get data on 'Zoom' webinars and 'Zoom'
   meetings. The 'Zoom' documentation is available at 
@@ -26,4 +36,4 @@ Imports:
   janitor (>= 2.1.0),
   tidyselect (>= 1.1.1),
   purrr (>= 0.3.4)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
