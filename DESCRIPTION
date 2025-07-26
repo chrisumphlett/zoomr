@@ -16,12 +16,6 @@ Authors@R:
         email = "schmidtpaul1989@outlook.com"
       )      
     )
-           
-Authors@R: c(person(given = "Jane", family = "Doe", role = c("aut", "cre"), email = "jane.doe@example.com", comment = c(ORCID = "0000-0000-0000-0000")),
-             person(given = "John", family = "Smith", role = "ctb", comment = "Contributed a bug fix"),
-             person(given = "Alice", family = "Johnson", role = "ctb", comment = c(ORCID = "0000-0000-0000-0001")))
-           
-           
 Description: Facilitates making a connection to the 'Zoom' API and executing
   various queries. You can use it to get data on 'Zoom' webinars and 'Zoom'
   meetings. The 'Zoom' documentation is available at 
