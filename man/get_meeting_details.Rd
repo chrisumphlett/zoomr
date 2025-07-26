@@ -9,18 +9,33 @@ get_meeting_details(meeting_id, account_id, client_id, client_secret)
 \arguments{
 \item{meeting_id}{Zoom Meeting ID (from list_meetings).}
 
-\item{account_id}{Account Id granted by the Zoom developer app.}
+\item{account_id}{Account ID granted by the Zoom developer app.}
 
-\item{client_id}{Client Id granted by the Zoom developer app.}
+\item{client_id}{Client ID granted by the Zoom developer app.}
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 }
 \value{
-A data frame with the metadata about a meeting.
+A data frame with the metadata about a meeting. The \code{type}
+column contains integer codes describing the meeting structure/format,
+while \code{meeting_format_label} provides human-readable descriptions:
+\itemize{
+  \item 1 = Instant meeting
+  \item 2 = Scheduled meeting
+  \item 3 = Recurring meeting (no fixed time)
+  \item 8 = Recurring meeting (fixed time)
+  \item 10 = Screen share only meeting
+}
 }
 \description{
-Get metadata about a single meeting including participant count, 
+Get metadata about a single meeting including participant count,
 duration, and other meeting statistics.
+}
+\details{
+This function retrieves basic meeting metadata. For more comprehensive
+meeting analytics and participant data, users with Pro+ Zoom accounts
+can access the Reports API endpoints which provide enhanced meeting
+details and participant information.
 }
 \examples{
 \dontrun{
@@ -31,6 +46,6 @@ dat <- get_meeting_details(meeting_id = "81753923023",
 }
 }
 \seealso{
-See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
-documentation on the Zoom API.
+Official Zoom API documentation:
+\url{https://developers.zoom.us/docs/api/meetings/#tag/meetings/get/meetings/\{meetingId\}}
 }

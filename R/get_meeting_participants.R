@@ -32,6 +32,7 @@
 #' @importFrom httr "content"
 #' @importFrom httr "GET"
 #' @importFrom httr "add_headers"
+#' @importFrom utils "URLencode"
 #'
 #' @return A data frame with data on each participant at a meeting. Includes
 #' an 'instance_date' column to identify which occurrence each participant

@@ -9,52 +9,54 @@ get_meeting_participants(
   account_id,
   client_id,
   client_secret,
-  page_size = 300,
-  include_all_instances = FALSE
+  page_size = 300
 )
 }
 \arguments{
 \item{meeting_id}{Zoom Meeting ID (from list_meetings).}
 
-\item{account_id}{Account Id granted by the Zoom developer app.}
+\item{account_id}{Account ID granted by the Zoom developer app.}
 
-\item{client_id}{Client Id granted by the Zoom developer app.}
+\item{client_id}{Client ID granted by the Zoom developer app.}
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 
 \item{page_size}{Number of records per page. Default is 300.}
-
-\item{include_all_instances}{For recurring meetings, whether to include
-participants from all instances (TRUE) or just the most recent (FALSE).
-Default is FALSE for backward compatibility.}
 }
 \value{
-A data frame with data on each participant at a meeting. For
-recurring meetings with include_all_instances=TRUE, includes an additional
-column 'instance_date' to identify which occurrence each participant
-attended.
+A data frame with data on each participant at a meeting. Includes
+an 'instance_date' column to identify which occurrence each participant
+attended (NA for non-recurring meetings).
 }
 \description{
-Get participant info about a single meeting or all instances of a recurring
-meeting.
+Get participant information from all instances of a meeting. For recurring
+meetings, this function automatically retrieves participants from all
+occurrences, making it ideal for workshop attendance tracking.
+}
+\details{
+\strong{Important Limitations:}
+\itemize{
+  \item Meeting instances older than 15 months cannot be retrieved
+  \item This function works with all Zoom account types
+}
+
+\strong{Enhanced Features for Pro+ Users:}
+Users with Pro+ Zoom accounts can access additional Reports API endpoints
+that provide more detailed participant analytics, custom date ranges,
+and enhanced filtering capabilities.
 }
 \examples{
 \dontrun{
-# Get participants from most recent instance only
-dat <- get_meeting_participants(meeting_id = "81753923023",
+# Get participants from all instances of a meeting
+dat <- get_meeting_participants(
+  meeting_id = "81753923023",
   your_account_id,
   your_client_id,
   your_client_secret)
-  
-# Get participants from ALL instances of a recurring meeting
-dat <- get_meeting_participants(meeting_id = "81753923023",
-  your_account_id,
-  your_client_id,
-  your_client_secret,
-  include_all_instances = TRUE)
 }
 }
 \seealso{
-See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for 
-documentation on the Zoom API.
+Official Zoom API documentation:
+\url{https://developers.zoom.us/docs/api/meetings/#tag/meetings/get/past_meetings/\{meetingId\}/instances}
+and \url{https://developers.zoom.us/docs/api/meetings/#tag/reports/get/report/meetings/\{meetingUuid\}/participants}
 }

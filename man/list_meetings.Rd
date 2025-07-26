@@ -14,25 +14,62 @@ list_meetings(
 )
 }
 \arguments{
-\item{user_id}{Zoom User Id.}
+\item{user_id}{Zoom User ID or email address.}
 
-\item{account_id}{Account Id granted by the Zoom developer app.}
+\item{account_id}{Account ID granted by the Zoom developer app.}
 
-\item{client_id}{Client Id granted by the Zoom developer app.}
+\item{client_id}{Client ID granted by the Zoom developer app.}
 
 \item{client_secret}{Client secret granted by the Zoom developer app.}
 
-\item{meeting_type}{Type of meetings to retrieve. Options are "scheduled", 
-"live", "upcoming", or "previous_meetings". Default is "previous_meetings".}
+\item{meeting_type}{Type of meetings to retrieve. Options are:
+\itemize{
+  \item "previous_meetings" = All previous meetings (default)
+  \item "scheduled" = All valid previous, live, and upcoming scheduled
+  meetings
+  \item "upcoming" = All upcoming meetings, including live meetings
+  \item "upcoming_meetings" = All upcoming meetings, including live meetings
+  \item "live" = Currently ongoing meetings
+}}
 
-\item{page_size}{Number of records per page. Default is 300.}
+\item{page_size}{Number of records per page. Maximum 300, default 300.}
 }
 \value{
-A data frame with all of the meetings hosted by a specific user.
+A data frame with meetings hosted by the specified user.
+The \code{meetings_type} column contains integer codes describing the
+meeting structure/format, while \code{meeting_format_label} provides
+human-readable descriptions:
+\itemize{
+  \item 1 = Instant meeting
+  \item 2 = Scheduled meeting
+  \item 3 = Recurring meeting (no fixed time)
+  \item 8 = Recurring meeting (fixed time)
+  \item 10 = Screen share only meeting
+}
 }
 \description{
-Get list of meetings for a User. This is used to get the meeting Id's and
-UUIDs to pass into other functions.
+Get list of meetings for a User. This function retrieves meeting IDs and
+UUIDs to pass into other functions for detailed analysis.
+}
+\details{
+\strong{Important Limitations:}
+\itemize{
+  \item \strong{6-month historical limit:} When using "upcoming",
+  "upcoming_meetings",
+  or "previous_meetings", only meetings from the last 6 months are returned
+  \item \strong{Scheduled meetings only:} Does not return instant meetings
+  \item \strong{Unexpired meetings only:} Only returns meetings that
+  haven't expired
+}
+
+\strong{For Enhanced Historical Data Access:}
+Users with Pro+ Zoom accounts can access the Reports API endpoint
+\code{/report/users/\{userId\}/meetings} which offers:
+\itemize{
+  \item Date range filtering with \code{from} and \code{to} parameters
+  \item Enhanced meeting details including participant information
+  \item Better historical data retrieval capabilities
+}
 }
 \examples{
 \dontrun{
@@ -44,6 +81,6 @@ dat <- list_meetings(user_id = "user_id_string",
 }
 }
 \seealso{
-See <https://marketplace.zoom.us/docs/api-reference/zoom-api/> for
-documentation on the Zoom API.
+Official Zoom API documentation:
+\url{https://developers.zoom.us/docs/api/meetings/#tag/meetings/get/users/\{userId\}/meetings}
 }
