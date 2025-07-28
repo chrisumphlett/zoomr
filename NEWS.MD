@@ -1,3 +1,7 @@
+# zoomr 0.4.0.9000
+
+* dev version
+
 # zoomr 0.4.0
 
 * Added support for regular Zoom meetings (in addition to webinars)
