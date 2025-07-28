@@ -1,4 +1,4 @@
-# zoomr 0.4.0.9000
+# zoomr 0.4.0
 
 * Added support for regular Zoom meetings (in addition to webinars)
 * Added `list_meetings()` to retrieve meetings for a user
